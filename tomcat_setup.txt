@@ -1,0 +1,52 @@
+How to run in STS with Tomcat Server.
+
+1. Update pom.xml
+
+<dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-tomcat</artifactId>
+        <scope>provided</scope>
+    </dependency>
+    
+2. Update main app class
+
+@SpringBootApplication
+public class Application extends SpringBootServletInitializer {
+
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(Application.class);
+    }
+
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
+    }
+}
+
+3. Configure "Project Facets" in Properties dialog
+
+select Project > right click > select properties > Project Facets
+
+Select check box with "Dynamic Web Module" and "Java"
+
+4. Update "Deployment Assembly" in Properties dialog
+
+Source                Deploy Path 
+/src/main/java        WEB-INF/classes
+/src/test/java        WEB-INF/classes
+/WebContent           /
+Maven Dependencies    WEB-INF/lib
+
+The "Deploy Path" can be typed in the box. "Maven Dependencies" is added through the dialog.
+
+5. Run tomcat server
+
+6. Type "localhost:8080/gs-rest-service-complete/greeting" in browser
+
+*Web Project Setting in "Properties" will show where the context root is.
+
+
